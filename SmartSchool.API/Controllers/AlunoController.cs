@@ -43,7 +43,6 @@ namespace SmartSchool.API.Controllers
             return Ok(Alunos);
         }
 
-
         // GET api/<AlunoController>/5
         [HttpGet("{id}")]
         public IActionResult Get(int id)
