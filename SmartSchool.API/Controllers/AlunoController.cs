@@ -39,7 +39,6 @@ namespace SmartSchool.API.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-
             return Ok(Alunos);
         }
 
