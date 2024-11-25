@@ -1,3 +1,4 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -56,12 +57,20 @@ namespace SmartSchool.API
 
 			//services.AddSingleton<IRepository, Repository>();
 			//services.AddTransient<IRepository, Repository>();
-			services.AddScoped<IRepository,Repository>();
+			
+          
             services.AddControllers()
                     .AddNewtonsoftJson(
                                         opt => opt.SerializerSettings.ReferenceLoopHandling =
                                                Newtonsoft.Json.ReferenceLoopHandling.Ignore); // para ignorar o loop infnito do json
-        }
+			
+            services.AddScoped<IRepository, Repository>();
+
+			// passando quais são as aplicações de dominio dos eus assembles
+            // auto mapper vai procurar dentro dos seus assembles que esta herdando de profille 
+            // busca toda classe que herda de profille
+			services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies()); 
+		}
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
