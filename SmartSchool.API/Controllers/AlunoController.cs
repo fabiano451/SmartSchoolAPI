@@ -9,9 +9,13 @@ using System.Collections.Generic;
 
 namespace SmartSchool.API.Controllers
 {
-    [Route("api/aluno")]
+    /// <summary>
+	/// 
+	/// </summary>
     [ApiController]
-    public class AlunoController : ControllerBase
+	[ApiVersion("1.0")]
+	[Route("api/v{version:apiVersion}/[controller]")]
+	public class AlunoController : ControllerBase
     {
 
         private readonly IRepository _repository;
@@ -21,9 +25,11 @@ namespace SmartSchool.API.Controllers
             _repository = repository;
             _mapper = mapper;
         }
-        
-        // GET: api/<AlunoController>
-        [HttpGet]
+
+		/// <summary>
+		/// Metodo responsavel para rertornar todos meus alunos
+		/// </summary>
+		[HttpGet]
         public IActionResult Get()
         {
             var aluno = _repository.GetAllAlunos(true);
@@ -31,14 +37,18 @@ namespace SmartSchool.API.Controllers
 			return Ok(_mapper.Map<IEnumerable<AlunoDto>>(aluno));
         }
 
-		// GET: api/<AlunoController>
+		/// <summary>
+		/// Metodo responsavel para rertornar um unico aluno dto
+		/// </summary>
 		[HttpGet("getRegister")]
 		public IActionResult GetRegister()
 		{
 			return Ok(new AlunoRegistrarDto());
 		}
 
-		// GET api/<AlunoController>/5
+		/// <summary>
+		/// Metodo responsavel para retornar um aluno por Id
+		/// </summary>
 		[HttpGet("{id}")]
         public IActionResult Get(int id)
         {
@@ -50,7 +60,10 @@ namespace SmartSchool.API.Controllers
 			return Ok(alunoDto);
 		}
 
-        [HttpPost]
+		/// <summary>
+		/// Metodo responsavel para inserir um aluno
+		/// </summary>
+		[HttpPost]
         public IActionResult Post(AlunoRegistrarDto model)
         {
 
@@ -65,7 +78,10 @@ namespace SmartSchool.API.Controllers
 			return BadRequest("Aluno não cadastrado");
 		}
 
-        [HttpPut("{id}")]
+		/// <summary>
+		/// Metodo responsavel para atualizar aluno
+		/// </summary>
+		[HttpPut("{id}")]
 		public IActionResult Put(int id, AlunoRegistrarDto model)
 		{
 			var aluno = _repository.GetAllAlunoById(id);
@@ -82,7 +98,9 @@ namespace SmartSchool.API.Controllers
 			return BadRequest("Aluno não Atualizado");
 		}
 
-
+		/// <summary>
+		/// Metodo responsavel para atualizar aluno parcialmente
+		/// </summary>
 		[HttpPatch("{id}")]
         public IActionResult Patch(int id, AlunoRegistrarDto model)
 		{
@@ -100,6 +118,9 @@ namespace SmartSchool.API.Controllers
 			return BadRequest("Aluno não Atualizado");
 		}
 
+		/// <summary>
+		/// Metodo responsavel para deletar aluno
+		/// </summary>
 		[HttpDelete("{id}")]
 		public IActionResult Delete(int id)
 		{

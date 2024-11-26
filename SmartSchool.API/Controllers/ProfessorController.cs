@@ -9,8 +9,9 @@ using System.Collections.Generic;
 
 namespace SmartSchool.API.Controllers
 {
-	[Route("api/professor")]
 	[ApiController]
+	[ApiVersion("2.0")]
+	[Route("api/v{version:apiVersion}/[controller]")]
 	public class ProfessorController : ControllerBase
 	{
 
