@@ -4,82 +4,179 @@
         <name>SmartSchool.API</name>
     </assembly>
     <members>
-        <member name="T:SmartSchool.API.Controllers.AlunoController">
+        <member name="T:SmartSchool.WebAPI.V1.Controllers.AlunoController">
+            <summary>
+            Versão 1 do meu controlador de Alunos
+            </summary>
+        </member>
+        <member name="M:SmartSchool.WebAPI.V1.Controllers.AlunoController.#ctor(SmartSchool.API.Data.IRepository,AutoMapper.IMapper)">
             <summary>
             
             </summary>
+            <param name="repo"></param>
+            <param name="mapper"></param>
         </member>
-        <member name="M:SmartSchool.API.Controllers.AlunoController.Get(SmartSchool.API.Helpers.PageParams)">
+        <member name="M:SmartSchool.WebAPI.V1.Controllers.AlunoController.Get(SmartSchool.API.Helpers.PageParams)">
             <summary>
-            Metodo responsavel para rertornar todos meus alunos
+            Método responsável para retornar todos os meus alunos
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SmartSchool.WebAPI.V1.Controllers.AlunoController.GetByDisciplinaId(System.Int32)">
+            <summary>
+            Método responsável por retonar apenas um único AlunoDTO.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SmartSchool.WebAPI.V1.Controllers.AlunoController.GetRegister">
+            <summary>
+            Método responsável por retonar apenas um único AlunoDTO.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SmartSchool.WebAPI.V1.Controllers.AlunoController.GetById(System.Int32)">
+            <summary>
+            Método responsável por retonar apenas um Aluno por meio do Código ID
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:SmartSchool.WebAPI.V1.Controllers.ProfessorController">
+            <summary>
+            Versão 1 do meu controlador de Professores
             </summary>
         </member>
-        <member name="M:SmartSchool.API.Controllers.AlunoController.GetRegister">
-            <summary>
-            Metodo responsavel para rertornar um unico aluno dto
-            </summary>
-        </member>
-        <member name="M:SmartSchool.API.Controllers.AlunoController.Get(System.Int32)">
-            <summary>
-            Metodo responsavel para retornar um aluno por Id
-            </summary>
-        </member>
-        <member name="M:SmartSchool.API.Controllers.AlunoController.Post(SmartSchool.API.Dto.AlunoRegistrarDto)">
-            <summary>
-            Metodo responsavel para inserir um aluno
-            </summary>
-        </member>
-        <member name="M:SmartSchool.API.Controllers.AlunoController.Put(System.Int32,SmartSchool.API.Dto.AlunoRegistrarDto)">
-            <summary>
-            Metodo responsavel para atualizar aluno
-            </summary>
-        </member>
-        <member name="M:SmartSchool.API.Controllers.AlunoController.Patch(System.Int32,SmartSchool.API.Dto.AlunoRegistrarDto)">
-            <summary>
-            Metodo responsavel para atualizar aluno parcialmente
-            </summary>
-        </member>
-        <member name="M:SmartSchool.API.Controllers.AlunoController.Delete(System.Int32)">
-            <summary>
-            Metodo responsavel para deletar aluno
-            </summary>
-        </member>
-        <member name="P:SmartSchool.API.Dto.AlunoDto.Id">
+        <member name="P:SmartSchool.WebAPI.V1.Dtos.AlunoDto.Id">
             <summary>
             Identificador e chave do Banco
             </summary>
         </member>
-        <member name="P:SmartSchool.API.Dto.AlunoDto.Matricula">
+        <member name="P:SmartSchool.WebAPI.V1.Dtos.AlunoDto.Matricula">
             <summary>
-            Chave do Aluno, para outros neg�cios na Institui��o
+            Chave do Aluno, para outros negócios na Instituição
             </summary>
         </member>
-        <member name="P:SmartSchool.API.Dto.AlunoDto.Nome">
+        <member name="P:SmartSchool.WebAPI.V1.Dtos.AlunoDto.Nome">
             <summary>
-            Nome � o Primeiro nome o o Sobrenome do Aluno
+            Nome e o Primeiro nome o o Sobrenome do Aluno
             </summary>
         </member>
-        <member name="P:SmartSchool.API.Dto.AlunoDto.Idade">
+        <member name="P:SmartSchool.WebAPI.V1.Dtos.AlunoDto.Idade">
             <summary>
-            Esta idade � o calculo relacionado a data de nascimento do Aluno
+            Esta idade é o calculo relacionado a data de nascimento do Aluno
             </summary>
         </member>
-        <member name="P:SmartSchool.API.Dto.AlunoDto.Ativo">
+        <member name="P:SmartSchool.WebAPI.V1.Dtos.AlunoDto.Ativo">
             <summary>
-            Ativar ou n�o o Aluno
+            Ativar ou não o Aluno
             </summary>
         </member>
-        <member name="P:SmartSchool.API.Dto.AlunoRegistrarDto.Id">
+        <member name="T:SmartSchool.WebAPI.V1.Dtos.AlunoPatchDto">
+            <summary>
+            Este � o DTO de Aluno para Registrar.
+            </summary>
+        </member>
+        <member name="T:SmartSchool.WebAPI.V1.Dtos.AlunoRegistrarDto">
+            <summary>
+            Este � o DTO de Aluno para Registrar.
+            </summary>
+        </member>
+        <member name="P:SmartSchool.WebAPI.V1.Dtos.AlunoRegistrarDto.Id">
             <summary>
             Identificador e chave do Banco.
             </summary>
         </member>
-        <member name="P:SmartSchool.API.Dto.AlunoRegistrarDto.Matricula">
+        <member name="P:SmartSchool.WebAPI.V1.Dtos.AlunoRegistrarDto.Matricula">
             <summary>
             Chave do Aluno, para outros neg�cios na Institui��o.
             </summary>
         </member>
-        <member name="P:SmartSchool.API.Dto.AlunoRegistrarDto.Nome">
+        <member name="P:SmartSchool.WebAPI.V1.Dtos.AlunoRegistrarDto.Nome">
+            <summary>
+            Nome � o Primeiro nome o o Sobrenome do Aluno.
+            </summary>
+        </member>
+        <member name="T:SmartSchool.WebAPI.V2.Controllers.AlunoController">
+            <summary>
+            Versão 2 do meu controlador de Alunos
+            </summary>
+        </member>
+        <member name="M:SmartSchool.WebAPI.V2.Controllers.AlunoController.Get(SmartSchool.API.Helpers.PageParams)">
+            <summary>
+            Metodo responsavel para rertornar todos meus alunos
+            </summary>
+        </member>
+        <member name="M:SmartSchool.WebAPI.V2.Controllers.AlunoController.GetRegister">
+            <summary>
+            Metodo responsavel para rertornar um unico aluno dto
+            </summary>
+        </member>
+        <member name="M:SmartSchool.WebAPI.V2.Controllers.AlunoController.Get(System.Int32)">
+            <summary>
+            Metodo responsavel para retornar um aluno por Id
+            </summary>
+        </member>
+        <member name="M:SmartSchool.WebAPI.V2.Controllers.AlunoController.Post(SmartSchool.WebAPI.V1.Dtos.AlunoRegistrarDto)">
+            <summary>
+            Metodo responsavel para inserir um aluno
+            </summary>
+        </member>
+        <member name="M:SmartSchool.WebAPI.V2.Controllers.AlunoController.Put(System.Int32,SmartSchool.WebAPI.V1.Dtos.AlunoRegistrarDto)">
+            <summary>
+            Metodo responsavel para atualizar aluno
+            </summary>
+        </member>
+        <member name="M:SmartSchool.WebAPI.V2.Controllers.AlunoController.Patch(System.Int32,SmartSchool.WebAPI.V1.Dtos.AlunoRegistrarDto)">
+            <summary>
+            Metodo responsavel para atualizar aluno parcialmente
+            </summary>
+        </member>
+        <member name="M:SmartSchool.WebAPI.V2.Controllers.AlunoController.Delete(System.Int32)">
+            <summary>
+            Metodo responsavel para deletar aluno
+            </summary>
+        </member>
+        <member name="P:SmartSchool.WebAPI.V2.Dtos.AlunoDto.Id">
+            <summary>
+            Identificador e chave do Banco
+            </summary>
+        </member>
+        <member name="P:SmartSchool.WebAPI.V2.Dtos.AlunoDto.Matricula">
+            <summary>
+            Chave do Aluno, para outros neg�cios na Institui��o
+            </summary>
+        </member>
+        <member name="P:SmartSchool.WebAPI.V2.Dtos.AlunoDto.Nome">
+            <summary>
+            Nome � o Primeiro nome o o Sobrenome do Aluno
+            </summary>
+        </member>
+        <member name="P:SmartSchool.WebAPI.V2.Dtos.AlunoDto.Idade">
+            <summary>
+            Esta idade � o calculo relacionado a data de nascimento do Aluno
+            </summary>
+        </member>
+        <member name="P:SmartSchool.WebAPI.V2.Dtos.AlunoDto.Ativo">
+            <summary>
+            Ativar ou n�o o Aluno
+            </summary>
+        </member>
+        <member name="T:SmartSchool.WebAPI.V2.Dtos.AlunoRegistrarDto">
+            <summary>
+            Este � o DTO de Aluno para Registrar.
+            </summary>
+        </member>
+        <member name="P:SmartSchool.WebAPI.V2.Dtos.AlunoRegistrarDto.Id">
+            <summary>
+            Identificador e chave do Banco.
+            </summary>
+        </member>
+        <member name="P:SmartSchool.WebAPI.V2.Dtos.AlunoRegistrarDto.Matricula">
+            <summary>
+            Chave do Aluno, para outros neg�cios na Institui��o.
+            </summary>
+        </member>
+        <member name="P:SmartSchool.WebAPI.V2.Dtos.AlunoRegistrarDto.Nome">
             <summary>
             Nome � o Primeiro nome o o Sobrenome do Aluno.
             </summary>

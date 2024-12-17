@@ -1,40 +1,41 @@
-﻿using AutoMapper;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SmartSchool.API.Data;
-using SmartSchool.API.Dto;
 using SmartSchool.API.Helpers;
 using SmartSchool.API.Model;
-using System.Collections;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+using SmartSchool.WebAPI.V1.Dtos;
 
-namespace SmartSchool.API.Controllers
+
+namespace SmartSchool.WebAPI.V2.Controllers
 {
     /// <summary>
-	/// 
-	/// </summary>
+    /// Versão 2 do meu controlador de Alunos
+    /// </summary>
     [ApiController]
-	[ApiVersion("1.0")]
-	[Route("api/v{version:apiVersion}/[controller]")]
+    [ApiVersion("2.0")]
+    [Route("api/v{version:apiVersion}/[controller]")]
 	public class AlunoController : ControllerBase
-    {
+	{
 
-        private readonly IRepository _repository;
-        private readonly IMapper _mapper;   
-        public AlunoController(IRepository repository, IMapper mapper)
-        {
-            _repository = repository;
-            _mapper = mapper;
-        }
+		private readonly IRepository _repository;
+		private readonly IMapper _mapper;
+		public AlunoController(IRepository repository, IMapper mapper)
+		{
+			_repository = repository;
+			_mapper = mapper;
+		}
 
 		/// <summary>
 		/// Metodo responsavel para rertornar todos meus alunos
 		/// </summary>
 		[HttpGet]
-        public async Task<IActionResult> Get([FromQuery] PageParams pageParams) // Task ganho de performance 
-        {
-            var aluno = await _repository.GetAllAlunosAsync(pageParams, true);
+		public async Task<IActionResult> Get([FromQuery] PageParams pageParams) // Task ganho de performance 
+		{
+			var aluno = await _repository.GetAllAlunosAsync(pageParams, true);
 
 			var alunosResult = _mapper.Map<IEnumerable<AlunoDto>>(aluno);
 
@@ -42,7 +43,7 @@ namespace SmartSchool.API.Controllers
 			Response.AddPagination(aluno.CurrentPage, aluno.PageSize, aluno.TotalCount, aluno.TotalPages);
 
 			return Ok(alunosResult);
-        }
+		}
 
 		/// <summary>
 		/// Metodo responsavel para rertornar um unico aluno dto
@@ -57,8 +58,8 @@ namespace SmartSchool.API.Controllers
 		/// Metodo responsavel para retornar um aluno por Id
 		/// </summary>
 		[HttpGet("{id}")]
-        public IActionResult Get(int id)
-        {
+		public IActionResult Get(int id)
+		{
 			var aluno = _repository.GetAllAlunoById(id, false);
 			if (aluno == null) return BadRequest("O Aluno não foi encontrado");
 
@@ -71,8 +72,8 @@ namespace SmartSchool.API.Controllers
 		/// Metodo responsavel para inserir um aluno
 		/// </summary>
 		[HttpPost]
-        public IActionResult Post(AlunoRegistrarDto model)
-        {
+		public IActionResult Post(AlunoRegistrarDto model)
+		{
 
 			var aluno = _mapper.Map<Aluno>(model);
 
@@ -109,7 +110,7 @@ namespace SmartSchool.API.Controllers
 		/// Metodo responsavel para atualizar aluno parcialmente
 		/// </summary>
 		[HttpPatch("{id}")]
-        public IActionResult Patch(int id, AlunoRegistrarDto model)
+		public IActionResult Patch(int id, AlunoRegistrarDto model)
 		{
 			var aluno = _repository.GetAllAlunoById(id);
 			if (aluno == null) return BadRequest("Aluno não encontrado");
