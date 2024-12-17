@@ -3,9 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SmartSchool.API.Data;
 using SmartSchool.API.Dto;
+using SmartSchool.API.Helpers;
 using SmartSchool.API.Model;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace SmartSchool.API.Controllers
 {
@@ -30,11 +32,16 @@ namespace SmartSchool.API.Controllers
 		/// Metodo responsavel para rertornar todos meus alunos
 		/// </summary>
 		[HttpGet]
-        public IActionResult Get()
+        public async Task<IActionResult> Get([FromQuery] PageParams pageParams) // Task ganho de performance 
         {
-            var aluno = _repository.GetAllAlunos(true);
+            var aluno = await _repository.GetAllAlunosAsync(pageParams, true);
 
-			return Ok(_mapper.Map<IEnumerable<AlunoDto>>(aluno));
+			var alunosResult = _mapper.Map<IEnumerable<AlunoDto>>(aluno);
+
+			// Retorna no Header a paginação 
+			Response.AddPagination(aluno.CurrentPage, aluno.PageSize, aluno.TotalCount, aluno.TotalPages);
+
+			return Ok(alunosResult);
         }
 
 		/// <summary>

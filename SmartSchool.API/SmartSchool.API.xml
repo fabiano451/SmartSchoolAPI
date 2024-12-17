@@ -9,7 +9,7 @@
             
             </summary>
         </member>
-        <member name="M:SmartSchool.API.Controllers.AlunoController.Get">
+        <member name="M:SmartSchool.API.Controllers.AlunoController.Get(SmartSchool.API.Helpers.PageParams)">
             <summary>
             Metodo responsavel para rertornar todos meus alunos
             </summary>

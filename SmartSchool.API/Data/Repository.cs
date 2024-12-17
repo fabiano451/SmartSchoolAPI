@@ -1,7 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SmartSchool.API.Helpers;
 using SmartSchool.API.Model;
 using SQLitePCL;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace SmartSchool.API.Data
@@ -33,7 +36,7 @@ namespace SmartSchool.API.Data
 			return (_context.SaveChanges() > 0);
 		}
 
-		public Aluno[] GetAllAlunos(bool includeProfessor = false)
+		public async Task<PageList<Aluno>> GetAllAlunosAsync(PageParams pageParams, bool includeProfessor = false)
 		{
 			IQueryable<Aluno> query = _context.Alunos;
 
@@ -42,16 +45,30 @@ namespace SmartSchool.API.Data
 				query = query.Include(a => a.AlunosDisciplinas)
 					.ThenInclude(ad => ad.Disciplina)
 					.ThenInclude(d => d.Professor);
-
-				query = query.AsNoTracking().OrderBy(a => a.Id);
-
-				return query.ToArray();
-
 			}
 
 			query = query.AsNoTracking().OrderBy(a => a.Id);
 
-			return query.ToArray();
+
+			if (!string.IsNullOrEmpty(pageParams.Nome))
+			{
+				query = query.Where(aluno => aluno.Nome
+														.ToUpper().Contains(pageParams.Nome.ToUpper()) ||
+														aluno.Sobrenome.ToUpper().Contains(pageParams.Nome));
+
+				if (pageParams.Matricula > 0)
+				{
+					query = query.Where(aluno => aluno.Matricula.Equals(pageParams.Matricula));
+				}
+
+				if (pageParams.Ativo != null)
+				{
+					query = query.Where(aluno => aluno.Ativo.Equals(pageParams.Ativo));
+				}
+			}
+
+
+			return await PageList<Aluno>.CreateAsync(query, pageParams.PageNumber, pageParams.PageSize);
 		}
 
 		public Aluno[] GetAllalunosByDisciplina(int disciplinaId, bool includeProfessor = false)
