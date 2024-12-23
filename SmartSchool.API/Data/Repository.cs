@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SmartSchool.API.Helpers;
 using SmartSchool.API.Model;
-using SQLitePCL;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;

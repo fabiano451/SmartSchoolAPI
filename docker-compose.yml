@@ -1,0 +1,6 @@
+services:
+  smartschool.api:
+    image: ${DOCKER_REGISTRY-}smartschoolapi
+    build:
+      context: .
+      dockerfile: SmartSchool.API\Dockerfile
